@@ -1,0 +1,81 @@
+/* app css stylesheet */
+
+html, body {
+  font-size: 18px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  min-width: 300px;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+h1, h2, h3{  
+  margin-bottom: 1rem;
+}
+
+table tbody:last-child{  
+  border-bottom: solid;
+  border-bottom-color: #ced4da;
+  border-bottom-width: 1px;
+}
+
+.tr-row{
+  display: table-row; 
+  display: contents;
+}
+
+.td-data{
+  display: table-cell;
+}
+
+.td-data a:link {  
+  text-decoration-line: none;
+  color: #286090;
+}
+
+label {
+  font-weight: 500;
+}
+
+.btn button, a, button {
+  min-width: 4.5rem;
+}
+
+.active {
+  font-weight: bolder; 
+}
+
+.detail-form{
+  margin-bottom: 1rem;
+}
+
+.form-row .col:last-child {
+  text-align: end;
+}
+
+#pull-rigt{
+  float: right;
+}
+
+@media screen and (max-width: 600px) {
+  html, body {
+    font-size: 16px;
+  }
+
+  .body-container{
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  #pull-rigt{    
+    width: 100%;
+  }
+
+  h1, h2, h3{
+    text-align: center;
+    margin-bottom: .8rem;
+  }
+}
