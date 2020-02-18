@@ -15,7 +15,7 @@ angular.module('myApp.widgetDetail', [])
             $scope.detail = WidgetsService.getDetail($scope.widgetId);
         }
 
-        $scope.$on('localStorageUpdated', function(event, data) {            
+        $scope.$on('itemRemoved', function(event, data) {            
             $scope.getDetail();            
         });
 

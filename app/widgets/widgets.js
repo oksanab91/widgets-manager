@@ -9,6 +9,13 @@ angular.module('myApp.widgets', [])
   controller: function($scope, WidgetsService, $uibModal) {    
     $scope.title = 'Widgets';
     $scope.widgets = [];    
+    $scope.selectedWidgetId = 0;
+    $scope.selectedRow = 0;
+
+    $scope.setClickedRow = function(index){
+        $scope.selectedRow = index;       
+        $scope.selectedWidgetId = $scope.widgets.length > index ? $scope.widgets[index].id : 0;
+    }
 
     $scope.removeItem = function(id) {
         WidgetsService.removeItem(id);
@@ -29,14 +36,18 @@ angular.module('myApp.widgets', [])
         modalInstance.result.then(function (item) {
             $scope.removeItem(item);
             $scope.getList();
-            $scope.broadcastEvent();
+            $scope.broadcastItemRemoved();
         }, function () {        
         });
     } 
 
-    $scope.broadcastEvent = function() {
-        $scope.$broadcast('localStorageUpdated', $scope.widgets);
+    $scope.broadcastItemRemoved = function() {
+        $scope.$broadcast('itemRemoved', $scope.widgets);
     };
+
+    $scope.$on('dataModified', function(event, data) {            
+        $scope.getList();            
+    });    
 
     $scope.getList = function() {
         $scope.widgets = WidgetsService.getList();

@@ -25,6 +25,7 @@ table tbody:last-child{
 .tr-row{
   display: table-row; 
   display: contents;
+  cursor:pointer;
 }
 
 .td-data{
@@ -34,6 +35,11 @@ table tbody:last-child{
 .td-data a:link {  
   text-decoration-line: none;
   color: #286090;
+}
+
+.selected-row {  
+  font-weight:bold;
+  background-color:#d9d9d9;   
 }
 
 label {
@@ -52,7 +58,7 @@ label {
   margin-bottom: 1rem;
 }
 
-.form-row .col:last-child {
+.form-row .col:not(.one-col):last-child {
   text-align: end;
 }
 

@@ -8,12 +8,21 @@ angular.module('myApp').config(function($stateProvider,$urlRouterProvider,
         .setNotify(true, true);
 
     var states = [       
-        
+        {
+            name: 'widgets.edit',
+            url: 'edit/{widgetId}', 
+            component: 'widgetEdit'
+        },
+        {
+            name: 'widgets.add',
+            url: 'edit/', 
+            component: 'widgetEdit'
+        },
         {             
             name: 'widgets.widget',
             url: '{widgetId}', 
             component: 'widgetDetail'
-        },        
+        },               
         {             
             name: 'widgets', 
             url: '/',

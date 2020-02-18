@@ -14,6 +14,12 @@ angular.module('myApp.widgetsService', []).service('WidgetsService', function (l
         this.table = localStorageService.get('widgetTable');
     }
 
+    this.getWidget = function(widgetId) {
+        let widget = this.table.find(el => {return el.id == widgetId});
+
+        return widget == null || widget == undefined ? {} : widget;
+    }
+
     this.getList = function() {
         let widgets = [];
 
@@ -28,6 +34,43 @@ angular.module('myApp.widgetsService', []).service('WidgetsService', function (l
         let widget = this.table.find(el => {return el.id == widgetId});
 
         return widget == null || widget == undefined ? [] : widget.detail;
+    }
+
+    this.addWidget = function(widget) {
+        let widgets = this.table;
+                
+        let item = widgets.find(el => {return el.id == widget.id});
+
+        if(item == null || item == undefined) {
+            widget.id = widgets.length + 1;
+            widgets.push(widget);            
+        }
+
+        localStorageService.set('widgetTable', widgets);
+        this.table = localStorageService.get('widgetTable'); 
+
+        return widget.id;
+    }
+
+    this.updateWidget = function(widget) {
+        let widgets = this.table;
+
+        for(var i=0; i < widgets.length; i++){
+            if(widgets[i].id == widget.id){
+                widgets[i] = widget; 
+            }
+        }
+
+        localStorageService.set('widgetTable', widgets);
+        this.table = localStorageService.get('widgetTable'); 
+
+        return widget.id;       
+    }
+
+    this.saveWidget = function(widget) {
+        if(widget.id == 0) return this.addWidget(widget);
+
+        return this.updateWidget(widget);
     }
 
     this.initList = function() {

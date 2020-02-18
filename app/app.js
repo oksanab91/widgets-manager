@@ -9,5 +9,6 @@ angular.module('myApp', [
   'myApp.widgetsService',
   'myApp.widgets',
   'myApp.widgetDetail',
-  'myApp.widgetRemove'
+  'myApp.widgetRemove',
+  'myApp.widgetEdit'
 ]);

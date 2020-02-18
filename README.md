@@ -1,10 +1,18 @@
 # `Widgets Services AngularJS SPA with UI-Router`
 
-This project contains three main features:
+This project contains four main features:
 
-- 'List' of the data displayed in the table,
-- 'Detail' for each item in the list opened as a child state,
-- 'Modal' view which allows to remove any item of the list.
+- 'List' of the data displayed in the table
+- 'Detail' for each item in the list opened as a child state
+- 'Add/Edit' view to add new widget or edit an existing one
+- 'Modal' view which allows to remove any item of the list
+
+And routing states for navigation through the views:
+
+- 'widgets'
+- 'widgets.widget'
+- 'widgets.edit'
+- 'widgets.add'
 
 
 
