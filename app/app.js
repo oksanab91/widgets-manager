@@ -6,6 +6,7 @@ angular.module('myApp', [
   'ui.router',
   'ui.router.state',
   'ui.bootstrap',
+  'myApp.widgetsService',
   'myApp.widgets',
   'myApp.widgetDetail',
   'myApp.widgetRemove'
