@@ -11,11 +11,15 @@ angular.module('myApp.widgetDetail', [])
         $scope.widgetId = $stateParams.widgetId;
         $scope.title = `Detail of Widget # ${$scope.widgetId}`;
             
-        this.getDetail = function() {
+        $scope.getDetail = function() {
             $scope.detail = WidgetsService.getDetail($scope.widgetId);
         }
 
-        this.getDetail();
+        $scope.$on('localStorageUpdated', function(event, data) {            
+            $scope.getDetail();            
+        });
+
+        $scope.getDetail();
     }
     
   });

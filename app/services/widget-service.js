@@ -27,7 +27,7 @@ angular.module('myApp.widgetsService', []).service('WidgetsService', function (l
     this.getDetail = function(widgetId) {        
         let widget = this.table.find(el => {return el.id == widgetId});
 
-        return widget.detail;
+        return widget == null || widget == undefined ? [] : widget.detail;
     }
 
     this.initList = function() {

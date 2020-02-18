@@ -8,7 +8,7 @@ angular.module('myApp.widgets', [])
   
   controller: function($scope, WidgetsService, $uibModal) {    
     $scope.title = 'Widgets';
-    $scope.widgets = [];
+    $scope.widgets = [];    
 
     $scope.removeItem = function(id) {
         WidgetsService.removeItem(id);
@@ -29,16 +29,21 @@ angular.module('myApp.widgets', [])
         modalInstance.result.then(function (item) {
             $scope.removeItem(item);
             $scope.getList();
+            $scope.broadcastEvent();
         }, function () {        
         });
     } 
+
+    $scope.broadcastEvent = function() {
+        $scope.$broadcast('localStorageUpdated', $scope.widgets);
+    };
 
     $scope.getList = function() {
         $scope.widgets = WidgetsService.getList();
     }
 
     WidgetsService.initList();
-    $scope.getList();
+    $scope.getList();    
   }
 
 })
