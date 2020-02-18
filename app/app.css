@@ -66,7 +66,23 @@ label {
   float: right;
 }
 
-@media screen and (max-width: 600px) {
+ul > li:first-child {  
+  flex: 1 1 auto;
+}
+
+.nowrap {
+  flex-wrap: nowrap;
+}
+
+.word-break {
+  word-break: break-all;
+}
+
+#btn-reset{  
+  font-size: 2.5rem;
+}
+
+@media screen and (max-width: 1000px) {
   html, body {
     font-size: 16px;
   }
@@ -80,8 +96,19 @@ label {
     width: 100%;
   }
 
-  h1, h2, h3{
-    text-align: center;
+  h1, h2, h3, #widgets-list{    
     margin-bottom: .8rem;
+  }
+  
+  .h-center {
+    text-align: center; 
+  }
+
+  .btn {
+    font-size: .8rem;
+  }
+
+  .table td, .table th {
+    padding: .55rem;
   }
 }

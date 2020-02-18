@@ -19,6 +19,11 @@ angular.module('myApp.widgetDetail', [])
             $scope.getDetail();            
         });
 
+        $scope.close = function () {
+            $scope.detail = [];
+            $scope.widgetId = 0;
+        }
+
         $scope.getDetail();
     }
     

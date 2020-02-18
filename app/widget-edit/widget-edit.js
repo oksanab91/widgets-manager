@@ -11,31 +11,12 @@ angular.module('myApp.widgetEdit', [])
             id: 0,
             name: '',
             detail: [
-                {'key': '', 'value': ''},
-                {'key': '', 'value': ''},
-                {'key': '', 'value': ''},
-                {'key': '', 'value': ''},
-                {'key': '', 'value': ''},
+                {'key': '', 'value': ''}                
             ]
         };        
         $scope.widgetId = $stateParams.widgetId;
         $scope.title = `Edit Widget`;
         
-        $scope.reset = function () {
-            $scope.widgetId = 0;
-            $scope.widget = {
-                id: 0,
-                name: '',
-                detail: [
-                    {'key': '', 'value': ''},
-                    {'key': '', 'value': ''},
-                    {'key': '', 'value': ''},
-                    {'key': '', 'value': ''},
-                    {'key': '', 'value': ''},
-                ]
-            }; 
-        }
-
         $scope.getWidget = function() {
             if($scope.widgetId > 0)
                 $scope.widget = WidgetsService.getWidget($scope.widgetId);            
@@ -46,12 +27,25 @@ angular.module('myApp.widgetEdit', [])
         };
 
         $scope.submit = function() {
-            $scope.widgetId = WidgetsService.saveWidget($scope.widget);
-            $scope.getWidget();
-            $scope.reset();
+            $scope.widgetId = WidgetsService.saveWidget($scope.widget);                      
             $scope.emitDataModified();
+            $scope.close();
         }
       
+        $scope.close = function () {
+            $scope.widgetId = 0;
+            $scope.widget = null;
+        }
+
+        $scope.delete = function(index) {            
+            if(index < $scope.widget.detail.length)            
+                $scope.widget.detail.splice(index, 1);            
+        }
+
+        $scope.add = function() {            
+            $scope.widget.detail.push({'key': '', 'value': ''});
+        }
+
         $scope.getWidget();
     }
     

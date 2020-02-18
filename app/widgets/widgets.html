@@ -1,12 +1,17 @@
 <main class="container pt-3 body-container">
     <div class="container-fluid">
-        <div class='row' ng-show="widgets">
+        <div class="row">
 
-            <!-- widgets list -->
-            <div class='col-md-6 col-sm-12'>
-                <h2>{{title}}</h2>
+            <!-- widgets list -->            
+            <div id="widgets-list" class='col-md-6 col-sm-12'>
+                
+                <ul class="nav">
+                    <li class="nav-item">
+                        <h2 class="h-center">{{title}}</h2>
+                    </li>
+                </ul>
                 <p ng-show="!widgets"><em>Loading...</em></p>
-
+                    
                 <table ng-show="widgets" class="table table-hover">
                     <thead>
                         <tr>
@@ -21,7 +26,9 @@
                             ng-class="{'selected-row': $index==selectedRow}">
 
                             <td>{{widget.id}}</td>
-                            <td>{{widget.name}}</td>
+                            <td>
+                                <div class="word-break">{{widget.name}}</div>
+                            </td>
 
                             <td>
                                 <a ui-sref="widgets.widget({widgetId: widget.id})" 
@@ -34,9 +41,10 @@
                             </td>
                         </tr>
                     </tbody>
-                </table>                
+                </table>
+            
                 <a ui-sref="widgets.add()" class="btn btn-primary" role="button">Add
-                </a>            
+                </a>           
             </div>
 
             <!-- details/edit -->

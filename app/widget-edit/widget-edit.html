@@ -1,5 +1,14 @@
 <div ng-show="widget">
-    <h2>{{title}}</h2>
+    <ul class="nav nowrap">
+        <li class="nav-item">
+            <h2>{{title}}</h2>
+        </li>
+        <li class="nav-item">
+            <button id="btn-reset" type="button" class="close" ng-click="close()">
+                <span>&times;</span>
+            </button>
+        </li>            
+    </ul>
     
     <form class="detail-form" name="editForm">
         
@@ -31,11 +40,11 @@
                     <span class="error" ng-show="editForm.name.$error">Required!</span>
                 </div>
 
-                <div class="col">
-                    <a href="#" routerLink="/widget-remove/{{dt.key}}" 
-                        class="btn btn-danger mb-2" role="button"> - </a>
-                    <a ui-sref="widget-edit({key: dt.key})" 
-                        class="btn btn-primary mb-2" role="button"> + </a>
+                <div class="col">                
+                    <button type="submit" class="btn btn-danger mb-2" ng-click="delete($index)"> - 
+                    </button>
+                    <button type="submit" class="btn btn-primary mb-2" ng-click="add()"> + 
+                    </button>
                 </div>                   
             </div>
         </div>
@@ -43,7 +52,8 @@
         <div class="form-row">
             <div class="col">
                 <button type="submit" class="btn btn-info" id="pull-rigt" 
-                    ng-disabled="!editForm.$valid" ng-click="submit()">Save</button>
+                    ng-disabled="!editForm.$valid" ng-click="submit()">Save
+                </button>
             </div>            
         </div>       
            

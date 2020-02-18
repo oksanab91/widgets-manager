@@ -1,5 +1,14 @@
 <div ng-show="detail && detail.length>0">
-    <h2>{{title}}</h2>
+    <ul class="nav nowrap">
+        <li class="nav-item">
+            <h2>{{title}}</h2>
+        </li>
+        <li class="nav-item">
+            <button id="btn-reset" type="button" class="close" ng-click="close()">
+                <span>&times;</span>
+            </button>
+        </li>            
+    </ul>
 
     <form class="detail-form">
         <div ng-repeat="dt in detail">
@@ -10,13 +19,7 @@
                 </div>
                 <div class="col">
                     <input type="text" class="form-control mb-2 mr-sm-2" id="{{dt.value + widgetId}}" ng-model="dt.value" readonly> 
-                </div>
-                <div class="col">
-                    <a href="#" routerLink="/widget-remove/{{dt.key}}" 
-                        class="btn btn-danger mb-2" role="button"> - </a>
-                    <a ui-sref="widget-edit({key: dt.key})" 
-                        class="btn btn-primary mb-2" role="button"> + </a>
-                </div>                   
+                </div>                
             </div>
         </div>
         
