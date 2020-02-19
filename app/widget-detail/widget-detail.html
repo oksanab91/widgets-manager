@@ -3,10 +3,10 @@
         <li class="nav-item">
             <h2>{{title}}</h2>
         </li>
-        <li class="nav-item">
-            <button id="btn-reset" type="button" class="close" ng-click="close()">
-                <span>&times;</span>
-            </button>
+        <li class="nav-item">            
+            <a ui-sref="widgets()" id="btn-close" 
+                class="btn close" role="button"><span>&times;</span>
+            </a>
         </li>            
     </ul>
 
@@ -15,10 +15,10 @@
         
             <div class="form-row">
                 <div class="col">
-                    <input type="text" class="form-control mb-2 mr-sm-2" id="{{dt.key + widgetId}}" ng-model="dt.key" readonly>
+                    <input type="text" class="form-control mb-2 mr-sm-2" id="'key'+{{$index}}" ng-model="dt.key" readonly>
                 </div>
                 <div class="col">
-                    <input type="text" class="form-control mb-2 mr-sm-2" id="{{dt.value + widgetId}}" ng-model="dt.value" readonly> 
+                    <input type="text" class="form-control mb-2 mr-sm-2" id="'val'+{{$index}}" ng-model="dt.value" readonly> 
                 </div>                
             </div>
         </div>

@@ -3,10 +3,13 @@
         <li class="nav-item">
             <h2>{{title}}</h2>
         </li>
-        <li class="nav-item">
-            <button id="btn-reset" type="button" class="close" ng-click="close()">
-                <span>&times;</span>
-            </button>
+        <li class="nav-item">      
+            <a ui-sref="widgets.widget({widgetId: widget.id})" id="btn-close" 
+                class="btn close" role="button" ng-show="mode=='edit'"><span>&times;</span>
+            </a>
+            <a ui-sref="widgets()" id="btn-close" 
+                class="btn close" role="button" ng-show="mode=='add'"><span>&times;</span>
+            </a>            
         </li>            
     </ul>
     
@@ -27,23 +30,25 @@
         
             <div class="form-row">
                 <div class="col">
-                    <input type="text" class="form-control mb-2 mr-sm-2" id="{{$index+dt.key}}" ng-model="dt.key" required>
+                    <input type="text" class="form-control mb-2 mr-sm-2" id="'key'+{{$index}}" ng-model="dt.key" required>
                 </div>
                 <div role="alert">
                     <span class="error" ng-show="editForm.name.$error">Required!</span>
                 </div>
 
                 <div class="col">
-                    <input type="text" class="form-control mb-2 mr-sm-2" id="$index+{{$index+dt.value}}" ng-model="dt.value" required> 
+                    <input type="text" class="form-control mb-2 mr-sm-2" id="'val'+{{$index}}" ng-model="dt.value" required> 
                 </div>
                 <div role="alert">
                     <span class="error" ng-show="editForm.name.$error">Required!</span>
                 </div>
 
-                <div class="col">                
-                    <button type="submit" class="btn btn-danger mb-2" ng-click="delete($index)"> - 
-                    </button>
-                    <button type="submit" class="btn btn-primary mb-2" ng-click="add()"> + 
+                <div class="col">                                    
+                    <button type="button" class="btn btn-danger mb-2" ng-click="delete($index)" 
+                        ng-show="setBtnShow($index, widget).delete"> - 
+                    </button>                    
+                    <button type="button" class="btn btn-primary mb-2" ng-click="add()" 
+                        ng-show="setBtnShow($index, widget).add"> + 
                     </button>
                 </div>                   
             </div>
@@ -51,7 +56,7 @@
         
         <div class="form-row">
             <div class="col">
-                <button type="submit" class="btn btn-info" id="pull-rigt" 
+                <button type="button" class="btn btn-info" id="pull-rigt" 
                     ng-disabled="!editForm.$valid" ng-click="submit()">Save
                 </button>
             </div>            

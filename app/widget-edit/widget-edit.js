@@ -6,7 +6,7 @@ angular.module('myApp.widgetEdit', [])
 
     templateUrl: 'widget-edit/widget-edit.html',
 
-    controller: function($scope, $stateParams, WidgetsService) {        
+    controller: function($scope, $stateParams, $state, WidgetsService) {        
         $scope.widget = {
             id: 0,
             name: '',
@@ -16,10 +16,16 @@ angular.module('myApp.widgetEdit', [])
         };        
         $scope.widgetId = $stateParams.widgetId;
         $scope.title = `Edit Widget`;
+        $scope.mode = 'edit';       
         
         $scope.getWidget = function() {
-            if($scope.widgetId > 0)
-                $scope.widget = WidgetsService.getWidget($scope.widgetId);            
+            if($scope.widgetId > 0) {
+                $scope.widget = WidgetsService.getWidget($scope.widgetId);                
+            }                
+            else{
+                $scope.title = `Add Widget`;
+                $scope.mode = 'add';
+            }                
         }
 
         $scope.emitDataModified = function() {
@@ -32,9 +38,8 @@ angular.module('myApp.widgetEdit', [])
             $scope.close();
         }
       
-        $scope.close = function () {
-            $scope.widgetId = 0;
-            $scope.widget = null;
+        $scope.close = function () {            
+            $state.go('widgets');
         }
 
         $scope.delete = function(index) {            
@@ -44,6 +49,13 @@ angular.module('myApp.widgetEdit', [])
 
         $scope.add = function() {            
             $scope.widget.detail.push({'key': '', 'value': ''});
+        }
+
+        $scope.setBtnShow = function(index, widget) {
+            let deleteShow = index>=0 && index<widget.detail.length && widget.detail.length>1;
+            let addShow = index==widget.detail.length-1;
+
+            return {'delete': deleteShow, 'add': addShow};
         }
 
         $scope.getWidget();

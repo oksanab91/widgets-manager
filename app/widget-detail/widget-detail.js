@@ -17,12 +17,7 @@ angular.module('myApp.widgetDetail', [])
 
         $scope.$on('itemRemoved', function(event, data) {            
             $scope.getDetail();            
-        });
-
-        $scope.close = function () {
-            $scope.detail = [];
-            $scope.widgetId = 0;
-        }
+        });        
 
         $scope.getDetail();
     }
