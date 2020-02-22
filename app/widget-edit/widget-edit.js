@@ -6,14 +6,14 @@ angular.module('myApp.widgetEdit', [])
 
     templateUrl: 'widget-edit/widget-edit.html',
 
-    controller: function($scope, $stateParams, $state, WidgetsService) {        
+    controller: function($scope, $stateParams, $state, WidgetsService, AlertService) {        
         $scope.widget = {
             id: 0,
             name: '',
             detail: [
                 {'key': '', 'value': ''}                
             ]
-        };        
+        };                       
         $scope.widgetId = $stateParams.widgetId;
         $scope.title = `Edit Widget`;
         $scope.mode = 'edit';       
@@ -30,12 +30,17 @@ angular.module('myApp.widgetEdit', [])
 
         $scope.emitDataModified = function() {
             $scope.$emit('dataModified', $scope.widgetId);
-        };
+        }
 
         $scope.submit = function() {
-            $scope.widgetId = WidgetsService.saveWidget($scope.widget);                      
-            $scope.emitDataModified();
-            $scope.close();
+            if(WidgetsService.validateUniqueName($scope.widget)) {
+                $scope.widgetId = WidgetsService.saveWidget($scope.widget);                                     
+                $scope.emitDataModified();
+                $scope.close();
+            }
+            else {                
+                $scope.addAlert('danger', 'The name is not unique.');
+            }            
         }
       
         $scope.close = function () {            
@@ -58,6 +63,10 @@ angular.module('myApp.widgetEdit', [])
             return {'delete': deleteShow, 'add': addShow};
         }
 
+        $scope.addAlert = function(type, msg) {
+            AlertService.add(type, msg);            
+        };    
+        
         $scope.getWidget();
     }
     

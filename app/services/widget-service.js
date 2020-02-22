@@ -73,6 +73,12 @@ angular.module('myApp.widgetsService', []).service('WidgetsService', function (l
         return this.updateWidget(widget);
     }
 
+    this.validateUniqueName = function(widget) {
+        let wid = this.table.find(el => {return el.name == widget.name && el.id != widget.id});
+
+        return wid == undefined ? true : false;        
+    }
+
     this.initList = function() {
         localStorageService.clearAll();
 
