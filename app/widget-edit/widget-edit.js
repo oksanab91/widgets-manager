@@ -3,28 +3,36 @@
 angular.module('myApp.widgetEdit', [])
 
 .component('widgetEdit', {
-
+    
     templateUrl: 'widget-edit/widget-edit.html',
 
     controller: function($scope, $stateParams, $state, WidgetsService, AlertService) {        
-        $scope.widget = {
+        const widgetInit = {
             id: 0,
             name: '',
             detail: [
                 {'key': '', 'value': ''}                
             ]
-        };                       
+        };
+        $scope.widget = {};                      
         $scope.widgetId = $stateParams.widgetId;
-        $scope.title = `Edit Widget`;
-        $scope.mode = 'edit';       
+        $scope.title = '';
+        $scope.mode = '';     
         
-        $scope.getWidget = function() {
-            if($scope.widgetId > 0) {
-                $scope.widget = WidgetsService.getWidget($scope.widgetId);                
+        this.$onInit = function() {
+            $scope.getWidget();            
+        }
+
+        $scope.getWidget = function() {            
+            if($scope.widgetId == undefined){
+                $scope.widget = widgetInit;
+                $scope.title = `Add`;
+                $scope.mode = 'add';                                             
             }                
-            else{
-                $scope.title = `Add Widget`;
-                $scope.mode = 'add';
+            else {
+                $scope.widget = WidgetsService.getWidget($scope.widgetId);  
+                $scope.title = `Edit`;
+                $scope.mode = 'edit';
             }                
         }
 
@@ -65,9 +73,8 @@ angular.module('myApp.widgetEdit', [])
 
         $scope.addAlert = function(type, msg) {
             AlertService.add(type, msg);            
-        };    
-        
-        $scope.getWidget();
+        };
+       
     }
     
   });

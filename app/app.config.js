@@ -11,23 +11,35 @@ angular.module('myApp').config(function($stateProvider,$urlRouterProvider,
         {
             name: 'widgets.edit',
             url: 'edit/{widgetId}', 
-            component: 'widgetEdit'
+            component: 'widgetEdit'                   
         },
         {
             name: 'widgets.add',
             url: 'edit/', 
-            component: 'widgetEdit'
+            component: 'widgetEdit'            
+        },                       
+        {             
+            name: 'widgets', 
+            url: '/',
+            component: 'widgets',            
+            resolve: {
+                widgets: function (WidgetsService){
+                    WidgetsService.initList();
+                    return WidgetsService.getList();
+                }
+            }
         },
         {             
             name: 'widgets.widget',
             url: '{widgetId}', 
-            component: 'widgetDetail'
-        },               
-        {             
-            name: 'widgets', 
-            url: '/',
-            component: 'widgets'
-        }     
+            component: 'widgetDetail',
+            resolve: {
+                widgetName: function(widgets, $transition$) {
+                    const widg = widgets.find(w => {return w.id == $transition$.params().widgetId});
+                    return widg == null ? '' : widg.name;
+                  }                
+            }
+        }    
 
     ]
 

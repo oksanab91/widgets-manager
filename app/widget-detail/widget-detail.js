@@ -4,13 +4,22 @@ angular.module('myApp.widgetDetail', [])
 
 .component('widgetDetail', {
 
+    bindings: {
+        widgetName: '<'
+    }, 
+
     templateUrl: 'widget-detail/widget-detail.html',
 
     controller: function($scope, $stateParams, WidgetsService) {
         $scope.detail = [];
         $scope.widgetId = $stateParams.widgetId;
-        $scope.title = `Detail of Widget # ${$scope.widgetId}`;
-            
+        $scope.title = '';
+        
+        this.$onInit = function() {
+            $scope.title = `${this.widgetName} Detail`;
+            $scope.getDetail();
+        }
+
         $scope.getDetail = function() {
             $scope.detail = WidgetsService.getDetail($scope.widgetId);
         }
@@ -18,8 +27,6 @@ angular.module('myApp.widgetDetail', [])
         $scope.$on('itemRemoved', function(event, data) {            
             $scope.getDetail();            
         });        
-
-        $scope.getDetail();
     }
     
   });
