@@ -6,6 +6,7 @@ angular.module('myApp', [
   'ui.router',
   'ui.router.state',
   'ui.bootstrap',
+  'rx',
   'myApp.widgetsService',
   'myApp.alertService',
   'myApp.appAlert',

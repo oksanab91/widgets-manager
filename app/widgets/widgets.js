@@ -10,15 +10,15 @@ angular.module('myApp.widgets', [])
 
   templateUrl: 'widgets/widgets.html',
   
-  controller: function($scope, WidgetsService, $uibModal) {
+  controller: function($scope, WidgetsService, $uibModal, rx) {
     
     $scope.title = 'Widgets';
     $scope.widgets = [];    
     $scope.selectedWidgetId = 0;
-    $scope.selectedRow = 0;
+    $scope.selectedRow = 0;    
 
     this.$onInit = function() {      
-      $scope.widgets = this.widgets;
+      $scope.widgets = this.widgets;     
     }
 
     $scope.setClickedRow = function(index){
@@ -43,8 +43,7 @@ angular.module('myApp.widgets', [])
         });
     
         modalInstance.result.then(function (item) {
-            $scope.removeItem(item);
-            $scope.getList();
+            $scope.removeItem(item);            
             $scope.broadcastItemRemoved();
         }, function () {        
         });
@@ -54,13 +53,20 @@ angular.module('myApp.widgets', [])
         $scope.$broadcast('itemRemoved', $scope.widgets);
     };
 
-    $scope.$on('dataModified', function(event, data) {      
-        $scope.getList();            
-    });   
-    
-    $scope.getList = function() {
+    // var dataFromAServer = rx.Observable.interval(500);
+		// dataFromAServer			
+		// 	.map(function() {
+    //     $scope.widgets = WidgetsService.getList();
+    //     $scope.$apply();
+    //   }).subscribe();
+      
+      
+    var scheduler = new rx.ScopeScheduler($scope);
+
+    rx.Observable.interval(500, scheduler)
+      .subscribe(function () {
         $scope.widgets = WidgetsService.getList();
-    }
+      });
   }
 
 })

@@ -1,21 +1,21 @@
 'use strict';
 
 angular.module('myApp.widgetsService', []).service('WidgetsService', function (localStorageService) {    
-    this.table = []; 
+    let table = []; 
 
     this.removeItem = function(id) {
-        for(var i=0; i<this.table.length; i++){
-            if(this.table[i].id == id){
-                this.table.splice(i, 1); 
+        for(var i=0; i<table.length; i++){
+            if(table[i].id == id){
+                table.splice(i, 1); 
             }
         }
         
-        localStorageService.set('widgetTable', this.table);
-        this.table = localStorageService.get('widgetTable');
+        localStorageService.set('widgetTable', table);
+        table = localStorageService.get('widgetTable');
     }
 
     this.getWidget = function(widgetId) {
-        let widget = this.table.find(el => {return el.id == widgetId});
+        let widget = table.find(el => {return el.id == widgetId});
 
         return widget == null || widget == undefined ? {} : widget;
     }
@@ -23,21 +23,21 @@ angular.module('myApp.widgetsService', []).service('WidgetsService', function (l
     this.getList = function() {
         let widgets = [];
 
-        this.table.forEach(row => {
+        table.forEach(row => {
             var item = {'id': row.id, 'name': row.name};
             widgets.push(item);
         });
-        return widgets;
+        return widgets;        
     }
 
     this.getDetail = function(widgetId) {        
-        let widget = this.table.find(el => {return el.id == widgetId});
+        let widget = table.find(el => {return el.id == widgetId});
 
         return widget == null || widget == undefined ? [] : widget.detail;
     }
 
     this.addWidget = function(widget) {
-        let widgets = this.table;
+        let widgets = table;
                 
         let item = widgets.find(el => {return el.id == widget.id});
 
@@ -47,13 +47,13 @@ angular.module('myApp.widgetsService', []).service('WidgetsService', function (l
         }
 
         localStorageService.set('widgetTable', widgets);
-        this.table = localStorageService.get('widgetTable'); 
+        table = localStorageService.get('widgetTable'); 
 
         return widget.id;
     }
 
     this.updateWidget = function(widget) {
-        let widgets = this.table;
+        let widgets = table;
 
         for(var i=0; i < widgets.length; i++){
             if(widgets[i].id == widget.id){
@@ -62,7 +62,7 @@ angular.module('myApp.widgetsService', []).service('WidgetsService', function (l
         }
 
         localStorageService.set('widgetTable', widgets);
-        this.table = localStorageService.get('widgetTable'); 
+        table = localStorageService.get('widgetTable'); 
 
         return widget.id;       
     }
@@ -74,7 +74,7 @@ angular.module('myApp.widgetsService', []).service('WidgetsService', function (l
     }
 
     this.validateUniqueName = function(widget) {
-        let wid = this.table.find(el => {return el.name == widget.name && el.id != widget.id});
+        let wid = table.find(el => {return el.name == widget.name && el.id != widget.id});
 
         return wid == undefined ? true : false;        
     }
@@ -108,7 +108,7 @@ angular.module('myApp.widgetsService', []).service('WidgetsService', function (l
         ];
 
         localStorageService.set('widgetTable', widgetsItems);
-        this.table = localStorageService.get('widgetTable'); 
+        table = localStorageService.get('widgetTable'); 
     }
 
 })
