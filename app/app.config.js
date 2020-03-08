@@ -34,8 +34,8 @@ angular.module('myApp').config(function($stateProvider,$urlRouterProvider,
             url: '{widgetId}', 
             component: 'widgetDetail',
             resolve: {
-                widgetName: function(widgets, $transition$) {
-                    const widg = widgets.find(w => {return w.id == $transition$.params().widgetId});
+                widgetName: function(WidgetsService, $transition$) {
+                    const widg = WidgetsService.getWidget($transition$.params().widgetId);                    
                     return widg == null ? '' : widg.name;
                   }                
             }

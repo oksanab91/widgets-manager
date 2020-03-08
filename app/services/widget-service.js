@@ -23,6 +23,7 @@ angular.module('myApp.widgetsService', []).service('WidgetsService', function (l
     this.getList = function() {
         let widgets = [];
 
+        table = localStorageService.get('widgetTable');
         table.forEach(row => {
             var item = {'id': row.id, 'name': row.name};
             widgets.push(item);

@@ -44,13 +44,13 @@ angular.module('myApp.widgets', [])
     
         modalInstance.result.then(function (item) {
             $scope.removeItem(item);            
-            $scope.broadcastItemRemoved();
+            $scope.broadcastItemRemoved(item);
         }, function () {        
         });
     } 
 
-    $scope.broadcastItemRemoved = function() {
-        $scope.$broadcast('itemRemoved', $scope.widgets);
+    $scope.broadcastItemRemoved = function(item) {
+        $scope.$broadcast('itemRemoved', item);
     };
 
     // var dataFromAServer = rx.Observable.interval(500);

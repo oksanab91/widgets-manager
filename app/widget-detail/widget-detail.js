@@ -10,7 +10,7 @@ angular.module('myApp.widgetDetail', [])
 
     templateUrl: 'widget-detail/widget-detail.html',
 
-    controller: function($scope, $stateParams, WidgetsService) {
+    controller: function($scope, $stateParams, $state, WidgetsService) {
         $scope.detail = [];
         $scope.widgetId = $stateParams.widgetId;
         $scope.title = '';
@@ -25,7 +25,9 @@ angular.module('myApp.widgetDetail', [])
         }
 
         $scope.$on('itemRemoved', function(event, data) {            
-            $scope.getDetail();            
+            if(data == $scope.widgetId) {                
+                $state.go('widgets');
+            }                       
         });        
     }
     
